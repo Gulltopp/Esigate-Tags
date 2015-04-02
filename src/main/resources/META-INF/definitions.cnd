@@ -1,0 +1,89 @@
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+<snt = 'http://www.smile.fr/jahia/nt/1.0'>
+<smix = 'http://www.smile.fr/jahia/mix/1.0'>
+
+//mixin generique
+[smix:esigateComponent] mixin
+
+[smix:ecpSecureComponent] mixin
++ image (snt:bgImage) = snt:bgImage autocreated
+
+[smix:esigateGenericComponent] > smix:ecpSecureComponent mixin
++ * (jmix:droppableContent) = jmix:droppableContent 
+
+[smix:esigateTemplatePage] mixin
+    extends = jnt:page
+- doExecute (boolean) = false
+- provider (string)
+- src (string) mandatory
+
+[snt:bgImage] > jnt:content
+- image (weakreference, picker[type='image'])
+
+
+//Syntaxe ESI
+
+//mixin pour les representations esi
+[smix:esigateEsi] > jmix:droppableContent, mix:title, smix:esigateComponent mixin
+
+[snt:esigateIncludeEsi] > jnt:content, smix:esigateEsi, smix:esigateGenericComponent
+- provider (string)
+- src (string)
+- fragment (string)
+- alt (string)
+- continueOnError (boolean) = false
+- rewriteAbsoluteUrl (boolean) = false
+- styleSheet (string)
+- xpath (string)
+- includeDistantResources (boolean) = false
+- includeLocale (boolean) = false
+- includeParameters (boolean) = false
+
+[snt:esigateReplaceEsi] > jnt:content, smix:esigateEsi, smix:esigateGenericComponent
+- fragment (string)
+- expression (string)
+
+[snt:esigateFragmentEsi] > jnt:content, smix:esigateEsi, smix:esigateGenericComponent
+- fragmentName (string) mandatory
+
+[snt:esigateInlineEsi] > jnt:content,smix:esigateEsi, smix:esigateGenericComponent
+- fragmentName (string) mandatory
+- fetchable (boolean) = false
+
+// Control section : try/catch, if/then/else
+[smix:esigateEsiControl] > jmix:droppableContent, smix:esigateComponent, mix:title, smix:ecpSecureComponent mixin
+
+[snt:esigateAttemptEsi] > jnt:content, smix:esigateGenericComponent
+
+[snt:esigateExceptEsi] > jnt:content, smix:esigateGenericComponent
+- code (string) mandatory
+
+[snt:esigateExceptEsiList] > jnt:content, jmix:list
++ * (snt:esigateExceptEsi) = snt:esigateExceptEsi
+
+[snt:esigateTryEsi] > jnt:content, smix:esigateEsiControl
++ attemptPart (snt:esigateAttemptEsi) = snt:esigateAttemptEsi autocreated
++ exceptPartList (snt:esigateExceptEsiList) = snt:esigateExceptEsiList autocreated
+
+[snt:esigateWhenEsi] >  jnt:content, smix:esigateGenericComponent
+- test (string) mandatory
+
+[snt:esigateWhenEsiList] > jnt:content, jmix:list
++ * (snt:esigateWhenEsi) = snt:esigateWhenEsi
+
+[snt:esigateOtherwiseEsi] >  jnt:content, smix:esigateGenericComponent
+
+[snt:esigateChooseEsi] > jnt:content, smix:esigateEsiControl
++ whenList (snt:esigateWhenEsiList) = snt:esigateWhenEsiList autocreated
++ otherwise (snt:esigateOtherwiseEsi) = snt:esigateOtherwiseEsi autocreated
+
+[snt:esigateCommentEsi] > jnt:content, smix:esigateEsiControl
+- text (string) mandatory
+
+[snt:esigateRemoveEsi] > jnt:content, smix:esigateEsiControl, smix:esigateGenericComponent
+
+[snt:esigateVarsEsi] > jnt:content, smix:esigateEsiControl, smix:esigateGenericComponent
+
+[snt:esigateHtmlCommentEsi] > jnt:content, smix:esigateEsiControl, smix:esigateGenericComponent
+

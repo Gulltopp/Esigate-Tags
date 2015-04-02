@@ -1,0 +1,69 @@
+body fieldset.esigate {
+    border:1px solid #333333;
+    padding:5px;
+    background: #cccccc;
+}
+
+body fieldset.esigate .innerEsi{
+    border:1px dotted #333333;
+}
+
+body fieldset.esigate h3 {
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0px;
+}
+
+body fieldset.esigate legend {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #333333;
+    font-weight: bold;
+    padding: 0 5px;
+    line-height: 1.5em;
+    font-size: 1em;
+    margin-bottom:0;
+    width:auto;
+}
+
+body fieldset.esigate strong {
+    font-weight: bold;
+}
+
+body fieldset.esigateComment {
+    background: #C9EAF3;
+}
+
+body fieldset.esigateFragment {
+    background: #ccff99;
+}
+
+body fieldset.esigateInclude {
+    background: #ccccff;
+}
+
+body fieldset.esigateReplace {
+    background: #A9C5EB;
+}
+
+body fieldset.esigateRemove {
+    background: #FF4848;
+}
+
+body fieldset.esigateChoose, 
+body fieldset.esigateTry{
+    background: #FF9C42;
+}
+
+body fieldset.esigateExcept,
+body fieldset.esigateAttempt,
+body fieldset.esigateWhen,
+body fieldset.esigateOtherwise {
+    background: #FFD586;
+}
+
+body fieldset.esigateWhenList,
+body fieldset.esigateExceptList {
+    background: none;
+}
+
+

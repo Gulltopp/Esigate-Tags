@@ -1,0 +1,39 @@
+package org.jahia.modules.esigatetags.rules
+
+#list any import classes here.
+import org.jahia.services.content.rules.*
+import org.jahia.services.content.JCRContentUtils
+import org.slf4j.Logger
+import org.jahia.modules.esigate.services.*
+
+expander rules.dsl
+
+#declare any global variables here
+global User user
+global Service service
+global EsiServices esiServices
+global Logger logger
+global JCRContentUtils jcrUtils
+
+
+
+rule "EsiGate created"
+	when
+		A new node is created
+			- the node has the type jnt:acl
+		The node has a parent
+			- the parent has the type smix:esigateComponent
+   then
+       Handle esiNode creation on parent
+end
+
+
+#rule "EsiGate created"
+#	salience -100
+#	when
+#		A new node is created
+#			- the node has the type smix:esigateComponent
+#	then
+#		Handle esiNode creation
+#end
+
